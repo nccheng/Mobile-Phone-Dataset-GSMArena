@@ -5,8 +5,9 @@ import os
 import time
 import json
 
+
 # Class gsmarena scrap the website phones models and its devices and save to csv file individually.
-class Gsmarena():
+class Gsmarena:
 
     # Constructor to initialize common useful varibales throughout the program.
     def __init__(self):
@@ -14,9 +15,11 @@ class Gsmarena():
         self.features = ["Brand", "Model Name", "Model Image"]
         self.temp1 = []
         self.phones_brands = []
-        self.url = 'https://www.gsmarena.com/' # GSMArena website url
-        self.new_folder_name = 'GSMArenaDataset' # Folder name on which files going to save.
-        self.absolute_path = os.popen('pwd').read().strip() + '/' + self.new_folder_name  # It create the absolute path of the GSMArenaDataset folder.
+        self.url = 'https://www.gsmarena.com/'  # GSMArena website url
+        self.new_folder_name = 'GSMArenaDataset'  # Folder name on which files going to save.
+        self.absolute_path = os.popen(
+            'pwd').read().strip() + '/' + self.new_folder_name
+        # It create the absolute path of the GSMArenaDataset folder.
 
     # This function crawl the html code of the requested URL.
     def crawl_html_page(self, sub_url):
@@ -109,7 +112,7 @@ class Gsmarena():
             time.sleep(6)
             print("Folder Created.")
         else:
-            print(self.new_folder_name , "directory already exists")
+            print(self.new_folder_name, "directory already exists")
 
     # This function check the csv file exists in the 'GSMArenaDataset' directory or not.
     def check_file_exists(self):
@@ -128,10 +131,10 @@ class Gsmarena():
                 print("Working on", brand[0].title(), "brand.")
                 for value in link:
                     datum = self.crawl_phones_models_specification(value, brand[0])
-                    datum = { k:v.replace('\n', ' ').replace('\r', ' ') for k,v in datum.items() }
+                    datum = {k: v.replace('\n', ' ').replace('\r', ' ') for k, v in datum.items()}
                     phones_data.append(datum)
                     print("Completed ", model_value, "/", len(link))
-                    model_value+=1
+                    model_value += 1
                 with open(self.absolute_path + '/' + brand[0].title() + ".csv", "w")  as file:
                     dict_writer = csv.DictWriter(file, fieldnames=self.features)
                     dict_writer.writeheader()
@@ -139,7 +142,7 @@ class Gsmarena():
                     encoded = str_phones_data.encode('utf-8')
                     load_list = json.loads(encoded)
                     for dicti in load_list:
-                        dict_writer.writerow({k:v.encode('utf-8') for k,v in dicti.items()})
+                        dict_writer.writerow({k: v.encode('utf-8') for k, v in dicti.items()})
                 print("Data loaded in the file")
             else:
                 print(brand[0].title() + '.csv file already in your directory.')
