@@ -15,8 +15,8 @@ class Gsmarena:
         self.features = ["Brand", "Model Name", "Model Image"]
         self.temp1 = []
         self.phones_brands = []
-        self.url = 'https://www.gsmarena.com/'  # GSMArena website url
-        self.new_folder_name = 'GSMArenaDataset'  # Folder name on which files going to save.
+        self.url = "https://www.gsmarena.com/"  # GSMArena website url
+        self.new_folder_name = "GSMArenaDataset"  # Folder name on which files going to save.
         self.absolute_path = os.popen(
             'pwd').read().strip() + '/' + self.new_folder_name
         # It create the absolute path of the GSMArenaDataset folder.
@@ -148,7 +148,7 @@ class Gsmarena:
                 print(brand[0].title() + '.csv file already in your directory.')
 
 
-# This is the main function which create the object of Gsmarena class and call the save_specificiton_to_file function.
+# This is the main function which create the object of Gsmarena class and call the save_specification_to_file function.
 i = 1
 while i == 1:
     if __name__ == "__main__":
